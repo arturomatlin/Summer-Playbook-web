@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Productive Summer Playbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Marquee Animation Styles */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 35s linear infinite;
+        }
+
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-container {
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+    </style>
+</head>
+
+<body
+    class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased transition-colors duration-300">
+
+    <header
+        class="bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700 sticky top-0 z-40 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="font-bold text-xl tracking-tight flex items-center gap-2">
+                <i class="fa-solid fa-sun text-yellow-500"></i> <span class="hidden sm:inline">Summer Playbook</span>
+            </div>
+            <nav class="flex items-center gap-4 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="#certifications" class="hidden md:block hover:text-blue-600 dark:hover:text-blue-400">Certs</a>
+                <a href="#volunteering"
+                    class="hidden md:block hover:text-blue-600 dark:hover:text-blue-400">Volunteer</a>
+                <a href="#projects" class="hidden md:block hover:text-blue-600 dark:hover:text-blue-400">Projects</a>
+                <a href="#reviews" class="hover:text-blue-600 dark:hover:text-blue-400">Reviews <i
+                        class="fa-regular fa-comment-dots"></i></a>
+                <button id="themeToggle"
+                    class="ml-2 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+
+        <div class="text-center mb-12">
+            <div id="motivationalQuote"
+                class="text-sm font-medium text-indigo-500 dark:text-indigo-400 mb-6 italic h-6 transition-opacity duration-500">
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-slate-900 dark:text-white">
+                No Internship? <span class="gradient-text">No Problem.</span>
+            </h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8">
+                Your alternative guide to a productive summer. Build your resume, learn new life skills, and prepare for
+                your future without the stress of a formal internship.
+            </p>
+            <button onclick="randomizeIdea()"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Inspire Me (Random Idea)
+            </button>
+        </div>
+
+        <section
+            class="mb-16 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg text-orange-600 dark:text-orange-400">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <h2 class="text-xl font-bold dark:text-white">Summer Kickoff Checklist</h2>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Your progress is saved locally in your browser!
+            </p>
+            <div class="space-y-3" id="checklistContainer">
+            </div>
+        </section>
+
+        <section id="certifications" class="mb-16 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-lg text-blue-600 dark:text-blue-400">
+                    <i class="fa-solid fa-certificate text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold dark:text-white">Upskill for Free (Certifications)</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6">
+                <a href="https://grow.google/certificates/" target="_blank"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 card-hover block">
+                    <h3 class="font-bold text-lg mb-2 flex justify-between dark:text-white">Google Career Certificates
+                        <i class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Learn in-demand skills like Data Analytics, IT
+                        Support, UX Design, and Project Management.</p>
+                </a>
+                <a href="https://academy.hubspot.com/" target="_blank"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 card-hover block">
+                    <h3 class="font-bold text-lg mb-2 flex justify-between dark:text-white">HubSpot Academy <i
+                            class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i></h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">100% free, industry-recognized certifications
+                        in Marketing, Sales, and Customer Service.</p>
+                </a>
+                <a href="https://www.coursera.org/" target="_blank"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 card-hover block">
+                    <h3 class="font-bold text-lg mb-2 flex justify-between dark:text-white">Coursera & edX <i
+                            class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i></h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Access university-level courses. Tip: Choose
+                        the "Audit" option to learn the material entirely for free.</p>
+                </a>
+                <a href="https://www.linkedin.com/learning/" target="_blank"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 card-hover block">
+                    <h3 class="font-bold text-lg mb-2 flex justify-between dark:text-white">LinkedIn Learning <i
+                            class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i></h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Check with your university or local public
+                        library—many provide free access to thousands of courses.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="volunteering" class="mb-16 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div
+                    class="bg-emerald-100 dark:bg-emerald-900/30 p-3 rounded-lg text-emerald-600 dark:text-emerald-400">
+                    <i class="fa-solid fa-tree text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold dark:text-white">Give Back & Grow</h2>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 md:p-8">
+                <p class="text-slate-600 dark:text-slate-400 mb-6">Volunteering isn't just about giving back; it's a
+                    massive resume booster. It demonstrates leadership, teamwork, empathy, and initiative.</p>
+
+                <div class="space-y-6">
+                    <div class="flex gap-4 items-start">
+                        <div
+                            class="bg-slate-100 dark:bg-slate-700 p-3 rounded-lg text-slate-600 dark:text-slate-300 mt-1">
+                            <i class="fa-solid fa-laptop"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg dark:text-white">Skills-Based Volunteering</h4>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">Websites like <a
+                                    href="https://www.catchafire.org/"
+                                    class="text-blue-600 dark:text-blue-400 hover:underline">Catchafire</a> match your
+                                specific professional skills (graphic design, writing, coding, accounting) with
+                                non-profits that need online help.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div
+                            class="bg-slate-100 dark:bg-slate-700 p-3 rounded-lg text-slate-600 dark:text-slate-300 mt-1">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg dark:text-white">Local Impact</h4>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">Use <a
+                                    href="https://www.volunteermatch.org/"
+                                    class="text-blue-600 dark:text-blue-400 hover:underline">VolunteerMatch</a> or <a
+                                    href="https://www.idealist.org/"
+                                    class="text-blue-600 dark:text-blue-400 hover:underline">Idealist</a> to find local
+                                community centers, animal shelters, or food banks in your hometown.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech" class="mb-16 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-teal-100 dark:bg-teal-900/30 p-3 rounded-lg text-teal-600 dark:text-teal-400">
+                    <i class="fa-solid fa-microchip text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold dark:text-white">Future-Proof Your Skills (Tech & AI)</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6">
+                <a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/"
+                    target="_blank"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 card-hover block">
+                    <h3 class="font-bold text-lg mb-2 flex justify-between dark:text-white">AI & Prompt Engineering <i
+                            class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i></h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">No matter your major, knowing how to
+                        effectively prompt AI tools (like ChatGPT) is becoming a critical workplace skill for boosting
+                        productivity.</p>
+                </a>
+                <a href="https://github.com/danistefanovic/build-your-own-x" target="_blank"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 card-hover block">
+                    <h3 class="font-bold text-lg mb-2 flex justify-between dark:text-white">"Build Your Own X" <i
+                            class="fa-brands fa-github text-sm text-slate-400"></i></h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">A massive GitHub repository filled with
+                        step-by-step guides to recreating your favorite technologies (bots, games, web servers) from
+                        scratch.</p>
+                </a>
+                <a href="https://www.freecodecamp.org/" target="_blank"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 card-hover block">
+                    <h3 class="font-bold text-lg mb-2 flex justify-between dark:text-white">FreeCodeCamp <i
+                            class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i></h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Learn HTML, CSS, and JS to build websites and
+                        write scripts. Coding logic is a fantastic problem-solving skill to add to your resume.</p>
+                </a>
+                <a href="https://learndigital.withgoogle.com/digitalgarage" target="_blank"
+                    class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 card-hover block">
+                    <h3 class="font-bold text-lg mb-2 flex justify-between dark:text-white">Google Digital Garage <i
+                            class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i></h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Free tutorials on digital marketing basics,
+                        data analytics, and understanding how the modern web works.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-16 scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-lg text-purple-600 dark:text-purple-400">
+                    <i class="fa-solid fa-rocket text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold dark:text-white">The "You" Project</h2>
+            </div>
+
+            <div class="bg-gradient-to-br from-indigo-900 to-purple-900 rounded-2xl text-white p-8 shadow-lg">
+                <h3 class="text-xl font-bold mb-4">How to Start a Personal Project</h3>
+                <p class="text-indigo-100 mb-6">A personal project is the ultimate proof that you are a self-starter.
+                    Here is your roadmap:</p>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/10">
+                        <div class="text-purple-300 font-bold mb-1">Step 1: Find the Spark</div>
+                        <p class="text-sm text-indigo-50">What bothers you? What do you love? Find a problem you want to
+                            solve or a topic you want to master.</p>
+                    </div>
+                    <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/10">
+                        <div class="text-purple-300 font-bold mb-1">Step 2: Define the Output</div>
+                        <p class="text-sm text-indigo-50">Make it tangible. Will it be a blog, a coded app, a business
+                            plan, a piece of research, or a YouTube video?</p>
+                    </div>
+                    <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/10">
+                        <div class="text-purple-300 font-bold mb-1">Step 3: Set a Timeline</div>
+                        <p class="text-sm text-indigo-50">Treat it like a job. Dedicate specific hours every week. Set 8
+                            weekly milestones for the summer.</p>
+                    </div>
+                    <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/10">
+                        <div class="text-purple-300 font-bold mb-1">Step 4: Document It</div>
+                        <p class="text-sm text-indigo-50">Build in public. Post weekly updates on LinkedIn or create a
+                            simple portfolio website to show your progress.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <details
+                class="group bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer"
+                open>
+                <summary class="flex justify-between items-center font-bold p-6 dark:text-white list-none">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-rose-100 dark:bg-rose-900/30 p-2 rounded text-rose-600 dark:text-rose-400"><i
+                                class="fa-solid fa-file-lines"></i></div>
+                        Resume Action Verbs Cheat Sheet
+                    </div>
+                    <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                </summary>
+
+                <div
+                    class="p-6 md:p-10 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+                    <div
+                        class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm relative text-center">
+                        <p
+                            class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-widest mb-2">
+                            Instead of saying...</p>
+
+                        <h4 id="weakVerbDisplay"
+                            class="text-3xl md:text-4xl font-black text-rose-500 dark:text-rose-400 mb-8 transition-opacity duration-300 h-10">
+                            "Responsible for"
+                        </h4>
+
+                        <p
+                            class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-widest mb-4">
+                            Try using...</p>
+
+                        <div id="strongVerbsDisplay"
+                            class="flex flex-wrap justify-center gap-3 transition-opacity duration-300 min-h-[40px]">
+                        </div>
+
+                        <div class="flex justify-center gap-3 mt-10" id="verbDots">
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <section
+            class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6 text-center mb-16">
+            <i class="fa-solid fa-briefcase text-amber-500 text-3xl mb-3"></i>
+            <h3 class="font-bold text-lg mb-2 dark:text-white">Connect with Lafayette Career Services</h3>
+            <p class="text-slate-700 dark:text-slate-300 text-sm max-w-xl mx-auto mb-5">
+                Remember, an internship is not the only path to success. Employers value curiosity, initiative, and
+                continuous learning. Use this summer to explore what you genuinely enjoy!
+            </p>
+            <a href="https://gateway.lafayette.edu/" target="_blank"
+                class="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-sm">
+                Visit the Gateway Career Center
+            </a>
+        </section>
+
+        <section id="reviews" class="scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-pink-100 dark:bg-pink-900/30 p-3 rounded-lg text-pink-600 dark:text-pink-400">
+                    <i class="fa-regular fa-comment-dots text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold dark:text-white">Community Board</h2>
+            </div>
+
+            <div
+                class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-8 text-center">
+                <div
+                    class="w-16 h-16 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-500 dark:text-indigo-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 dark:text-white">Share Your Thoughts!</h3>
+                <p class="text-slate-600 dark:text-slate-400 max-w-lg mx-auto mb-6">
+                    Leave a casual review, share a summer goal, or drop some advice for other residents! You can stay
+                    completely anonymous or leave your name if you'd like.
+                </p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeseVxxgpf3ZDm_YM8VtqYlDIfUa3wL2PLSckj5Itqi_yzzsg/viewform?usp=dialog"
+                    target="_blank"
+                    class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-sm">
+                    <i class="fa-solid fa-pen mr-2"></i> Write a Message
+                </a>
+                <p class="text-xs text-slate-400 mt-4 italic mb-8">*Link opens a quick Google Form</p>
+
+                <div class="border-t border-slate-200 dark:border-slate-700 pt-8 mt-8">
+                    <h4 class="text-lg font-bold mb-6 dark:text-white text-left">Recent Submissions</h4>
+
+                    <div class="marquee-container overflow-hidden w-full py-4">
+                        <div id="marquee-track" class="animate-marquee gap-6">
+                            <div class="text-slate-400 text-sm italic">Loading reviews...</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 flex flex-col items-center justify-center gap-4 text-sm mt-12">
+        <p>Created for Residents • Have a great summer!</p>
+        <img src="https://api.visitorbadge.io/api/visitors?path=lafayette-summer-playbook&label=Page%20Views&countColor=%233b82f6"
+            alt="Visitor Badge" class="opacity-80 hover:opacity-100 transition-opacity" />
+    </footer>
+
+    <div id="ideaModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full p-8 shadow-2xl transform scale-95 transition-transform duration-300"
+            id="ideaModalContent">
+            <div class="flex justify-between items-start mb-4">
+                <div
+                    class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <button onclick="closeModal()"
+                    class="text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <h3 id="ideaTitle" class="text-2xl font-bold mb-2 dark:text-white">Idea Title</h3>
+            <p id="ideaDesc" class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">Description goes here.</p>
+            <div class="flex gap-3">
+                <button onclick="randomizeIdea()"
+                    class="flex-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> Try Another
+                </button>
+                <a id="ideaLink" href="#" target="_blank"
+                    class="flex-1 text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                    Let's Do It
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        //  PASTE YOUR NEW "CSV" GOOGLE SHEET LINK HERE
+        // ==========================================
+        const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlKu0uqvI5I8S50E4ArkzdgY84m0mgDkeeN5FJ2mLSbr8kWg4fTYu_sKI1JREHyqg3HHAj6NRnhFwx/pub?gid=1155014584&single=true&output=csv";
+
+        // --- 1. THEME TOGGLE LOGIC ---
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun';
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'light';
+            } else {
+                localStorage.theme = 'dark';
+            }
+            updateTheme();
+        });
+        updateTheme();
+
+        // --- 2. MOTIVATION QUOTES ---
+        const quotes = [
+            "\"The expert in anything was once a beginner.\" — Helen Hayes",
+            "\"Small daily improvements over time lead to stunning results.\" — Robin Sharma",
+            "\"You don't have to be great to start, but you have to start to be great.\" — Zig Ziglar",
+            "\"The beautiful thing about learning is that no one can take it away from you.\" — B.B. King",
+            "\"Don't let what you cannot do interfere with what you can do.\" — John Wooden"
+        ];
+        document.getElementById('motivationalQuote').innerText = quotes[Math.floor(Math.random() * quotes.length)];
+
+        // --- 3. INTERACTIVE CHECKLIST ---
+        const checklistItems = [
+            { id: 'chk_1', text: 'Update my Resume / CV' },
+            { id: 'chk_2', text: 'Create or update my LinkedIn profile' },
+            { id: 'chk_3', text: 'Pick one free certification to start' },
+            { id: 'chk_4', text: 'Brainstorm one personal project idea' },
+            { id: 'chk_5', text: 'Bookmark Lafayette Gateway Career Center' }
+        ];
+
+        const checklistContainer = document.getElementById('checklistContainer');
+        const savedProgress = JSON.parse(localStorage.getItem('playbook_checklist') || '{}');
+
+        checklistItems.forEach(item => {
+            const isChecked = savedProgress[item.id] ? 'checked' : '';
+            const html = `
+                <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer border border-transparent hover:border-slate-200 dark:hover:border-slate-600 transition-colors">
+                    <input type="checkbox" id="${item.id}" ${isChecked} class="w-5 h-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                    <span class="text-slate-700 dark:text-slate-300 font-medium select-none">${item.text}</span>
+                </label>
+            `;
+            checklistContainer.insertAdjacentHTML('beforeend', html);
+
+            document.getElementById(item.id).addEventListener('change', (e) => {
+                savedProgress[item.id] = e.target.checked;
+                localStorage.setItem('playbook_checklist', JSON.stringify(savedProgress));
+            });
+        });
+
+        // --- 4. INSPIRE ME RANDOMIZER (UPDATED WITH VARIETY) ---
+        const ideas = [
+            { title: "Code a Discord Bot", desc: "Use Python or JS to build a bot for your server. It teaches API integration and server logic.", link: "https://github.com/danistefanovic/build-your-own-x" },
+            { title: "Crisis Text Line", desc: "Psychology/Pre-Med: Volunteer as a crisis counselor. It provides rigorous training and invaluable empathy-building experience.", link: "https://www.crisistextline.org/volunteer/" },
+            { title: "Market Research Project", desc: "Econ/Business: Pick a local business and write a comprehensive market analysis or competitive landscape report.", link: "https://www.coursera.org/learn/market-research" },
+            { title: "Google Data Analytics", desc: "Start the free Google Data Analytics cert. Data skills are needed in almost every modern job.", link: "https://grow.google/certificates/" },
+            { title: "Learn LaTeX", desc: "Math/Science: Master LaTeX, the industry standard for typesetting complex math and physics papers. Create a portfolio of beautifully formatted proofs.", link: "https://www.overleaf.com/learn" },
+            { title: "Build a Custom Keyboard", desc: "Engineering: Solder and assemble a custom mechanical keyboard. It’s a great hands-on project that blends electronics and design.", link: "https://keyboard.university/" },
+            { title: "Kaggle Data Challenge", desc: "Science/Tech: Enter a free Kaggle competition. Analyze real-world datasets from chemistry, biology, or physics using basic Python.", link: "https://www.kaggle.com/" },
+            { title: "Virtual Volunteering", desc: "Help a non-profit update their website or social media from your couch using Catchafire.", link: "https://www.catchafire.org/" },
+            { title: "Master Prompting", desc: "Take DeepLearning.ai's free 1-hour course on Prompt Engineering. It will save you hundreds of hours in college.", link: "https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" },
+            { title: "Start a Substack", desc: "Create a free newsletter about a niche hobby you love. It proves you can write consistently and build an audience.", link: "https://substack.com/" }
+        ];
+
+        window.randomizeIdea = function () {
+            const idea = ideas[Math.floor(Math.random() * ideas.length)];
+            document.getElementById('ideaTitle').innerText = idea.title;
+            document.getElementById('ideaDesc').innerText = idea.desc;
+            document.getElementById('ideaLink').href = idea.link;
+
+            const modal = document.getElementById('ideaModal');
+            const content = document.getElementById('ideaModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        }
+
+        window.closeModal = function () {
+            const modal = document.getElementById('ideaModal');
+            const content = document.getElementById('ideaModalContent');
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // --- 5. ROTATING VERB CHEAT SHEET ---
+        const verbCategories = [
+            { weak: '"Responsible for"', strong: ['Orchestrated', 'Spearheaded', 'Executed', 'Managed', 'Directed'] },
+            { weak: '"Worked on"', strong: ['Collaborated', 'Partnered', 'Co-authored', 'Contributed', 'Consulted'] },
+            { weak: '"Helped with"', strong: ['Facilitated', 'Supported', 'Enabled', 'Guided', 'Mentored'] },
+            { weak: '"Made / Built"', strong: ['Engineered', 'Architected', 'Designed', 'Formulated', 'Constructed'] },
+            { weak: '"Figured out"', strong: ['Analyzed', 'Evaluated', 'Investigated', 'Resolved', 'Deciphered'] }
+        ];
+
+        let currentVerbIndex = 0;
+        let verbInterval;
+
+        function renderVerbs(index) {
+            const cat = verbCategories[index];
+            const weakEl = document.getElementById('weakVerbDisplay');
+            const strongEl = document.getElementById('strongVerbsDisplay');
+            const dotsEl = document.getElementById('verbDots');
+
+            // Fade out
+            weakEl.style.opacity = 0;
+            strongEl.style.opacity = 0;
+
+            setTimeout(() => {
+                // Update text
+                weakEl.innerText = cat.weak;
+
+                // Create pill elements for strong verbs
+                strongEl.innerHTML = cat.strong.map(v =>
+                    `<span class="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-400 px-4 py-2 rounded-full font-bold text-sm shadow-sm border border-indigo-200 dark:border-indigo-800">${v}</span>`
+                ).join('');
+
+                // Update dots
+                dotsEl.innerHTML = verbCategories.map((_, i) =>
+                    `<button onclick="setVerb(${i})" class="w-3 h-3 rounded-full transition-colors ${i === index ? 'bg-indigo-600 dark:bg-indigo-400' : 'bg-slate-300 dark:bg-slate-600 hover:bg-slate-400'}"></button>`
+                ).join('');
+
+                // Fade back in
+                weakEl.style.opacity = 1;
+                strongEl.style.opacity = 1;
+            }, 300); // Wait for fade out to finish
+        }
+
+        window.setVerb = function (index) {
+            currentVerbIndex = index;
+            renderVerbs(index);
+            resetVerbInterval(); // Restart the timer if user manually clicks
+        };
+
+        function resetVerbInterval() {
+            clearInterval(verbInterval);
+            verbInterval = setInterval(() => {
+                currentVerbIndex = (currentVerbIndex + 1) % verbCategories.length;
+                renderVerbs(currentVerbIndex);
+            }, 4500); // Rotate automatically every 4.5 seconds
+        }
+
+        // Initialize Verbs
+        renderVerbs(0);
+        resetVerbInterval();
+
+
+        // --- 6. FLOATING REVIEWS FETCH LOGIC ---
+        const defaultReviews = [
+            { name: "Arturo", text: "This is a great resource, I'm planning to learn Python this summer!" },
+            { name: "Anonymous", text: "Didn't realize HubSpot offered free marketing certs. Definitely adding that to my resume." },
+            { name: "Sarah J.", text: "Catchafire sounds like exactly what I need to build my graphic design portfolio." },
+            { name: "Anonymous", text: "Thank you for putting this together!" }
+        ];
+
+        function renderFloatingBoxes(reviews) {
+            const track = document.getElementById('marquee-track');
+            track.innerHTML = '';
+
+            const buildCard = (r) => {
+                const initial = (r.name && r.name.toLowerCase() !== 'anonymous') ? r.name.charAt(0).toUpperCase() : '<i class="fa-solid fa-user"></i>';
+                const displayName = r.name || 'Anonymous';
+
+                return `
+                    <div class="inline-flex w-72 flex-col whitespace-normal bg-slate-50 dark:bg-slate-800 p-5 rounded-2xl shadow-sm hover:shadow-md border border-slate-200 dark:border-slate-700 flex-shrink-0 transform transition-transform duration-300 hover:-translate-y-1 text-left">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold text-lg">
+                                ${initial}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 dark:text-white text-sm">${displayName}</h4>
+                                <p class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Resident</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed">"${r.text}"</p>
+                    </div>
+                `;
+            };
+
+            let cardsHTML = reviews.map(buildCard).join('');
+            track.innerHTML = cardsHTML + cardsHTML;
+        }
+
+        async function fetchReviews() {
+            if (!GOOGLE_SHEET_CSV_URL || GOOGLE_SHEET_CSV_URL === "PASTE_YOUR_CSV_LINK_HERE") {
+                renderFloatingBoxes(defaultReviews);
+                return;
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SHEET_CSV_URL);
+                const csvText = await response.text();
+
+                const rows = csvText.split('\n').slice(1);
+                const parsedReviews = [];
+
+                rows.forEach(row => {
+                    if (!row.trim()) return;
+                    const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
+
+                    const name = cols[1];
+                    const text = cols[2];
+
+                    if (text) {
+                        parsedReviews.push({ name: name, text: text });
+                    }
+                });
+
+                if (parsedReviews.length > 0) {
+                    renderFloatingBoxes(parsedReviews);
+                } else {
+                    renderFloatingBoxes(defaultReviews);
+                }
+
+            } catch (error) {
+                console.error("Could not load Google Sheet, displaying defaults.", error);
+                renderFloatingBoxes(defaultReviews);
+            }
+        }
+
+        fetchReviews();
+
+    </script>
+</body>
+
+</html>
