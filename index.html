@@ -426,12 +426,11 @@
     </div>
 
     <script>
-        // ==========================================
-        //  PASTE YOUR NEW "CSV" GOOGLE SHEET LINK HERE
-        // ==========================================
+
+        // Google CSV link
         const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlKu0uqvI5I8S50E4ArkzdgY84m0mgDkeeN5FJ2mLSbr8kWg4fTYu_sKI1JREHyqg3HHAj6NRnhFwx/pub?gid=1155014584&single=true&output=csv";
 
-        // --- 1. THEME TOGGLE LOGIC ---
+        // 1. THEME TOGGLE LOGIC
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
 
@@ -455,7 +454,7 @@
         });
         updateTheme();
 
-        // --- 2. MOTIVATION QUOTES ---
+        // 2. MOTIVATION QUOTES
         const quotes = [
             "\"The expert in anything was once a beginner.\" — Helen Hayes",
             "\"Small daily improvements over time lead to stunning results.\" — Robin Sharma",
@@ -465,7 +464,7 @@
         ];
         document.getElementById('motivationalQuote').innerText = quotes[Math.floor(Math.random() * quotes.length)];
 
-        // --- 3. INTERACTIVE CHECKLIST ---
+        // 3. INTERACTIVE CHECKLIST
         const checklistItems = [
             { id: 'chk_1', text: 'Update my Resume / CV' },
             { id: 'chk_2', text: 'Create or update my LinkedIn profile' },
@@ -493,7 +492,7 @@
             });
         });
 
-        // --- 4. INSPIRE ME RANDOMIZER (UPDATED WITH VARIETY) ---
+        // 4. INSPIRE ME RANDOMIZER
         const ideas = [
             { title: "Code a Discord Bot", desc: "Use Python or JS to build a bot for your server. It teaches API integration and server logic.", link: "https://github.com/danistefanovic/build-your-own-x" },
             { title: "Crisis Text Line", desc: "Psychology/Pre-Med: Volunteer as a crisis counselor. It provides rigorous training and invaluable empathy-building experience.", link: "https://www.crisistextline.org/volunteer/" },
@@ -530,7 +529,7 @@
             setTimeout(() => modal.classList.add('hidden'), 300);
         }
 
-        // --- 5. ROTATING VERB CHEAT SHEET ---
+        // 5. ROTATING VERB CHEAT SHEET
         const verbCategories = [
             { weak: '"Responsible for"', strong: ['Orchestrated', 'Spearheaded', 'Executed', 'Managed', 'Directed'] },
             { weak: '"Worked on"', strong: ['Collaborated', 'Partnered', 'Co-authored', 'Contributed', 'Consulted'] },
@@ -591,7 +590,7 @@
         resetVerbInterval();
 
 
-        // --- 6. FLOATING REVIEWS FETCH LOGIC ---
+        // 6. FLOATING REVIEWS FETCH LOGIC
         const defaultReviews = [
             { name: "Arturo", text: "This is a great resource, I'm planning to learn Python this summer!" },
             { name: "Anonymous", text: "Didn't realize HubSpot offered free marketing certs. Definitely adding that to my resume." },
